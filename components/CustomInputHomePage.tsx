@@ -3,27 +3,11 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
-import { CircleCheck, CircleX } from "lucide-react";
 
-const testData = [
-  {
-    id: 1,
-    errMsg: "Поле должно содержать 11 цифр",
-    isError: true,
-  },
-  {
-    id: 2,
-    errMsg: "Поле должно содержать 10  Символы",
-    isError: true,
-  },
-  {
-    id: 3,
-    errMsg: "Пароль должен быть не менее 6 символов",
-    isError: true,
-  },
-];
 
-export default function CustomInput({
+
+
+export default function CustomInputHomePage({
   label,
   value,
   onChange,
@@ -31,8 +15,7 @@ export default function CustomInput({
   icon,
   placeholder,
   isPasswordInput,
-  styles,
-  errorId,
+  styles
 }: {
   label: string;
   value: string;
@@ -42,7 +25,6 @@ export default function CustomInput({
   placeholder: string;
   isPasswordInput?: boolean;
   styles?: string;
-  errorId?: number;
 }) {
   const [inputType, setinputType] = useState<"password" | "text">("password");
 
@@ -54,7 +36,6 @@ export default function CustomInput({
     }
   };
 
-  const errorMsg = testData.find((item) => item.id === errorId);
 
 
 
@@ -63,9 +44,7 @@ export default function CustomInput({
       <div
         className={cn(
           `relative flex gap-2 flex-wrap items-center bg-[#efefef] text-[#909090] w-[339px] h-[82px] rounded-[8px] pl-6 pr-2 
-        outline outline-offset-0.5 ${
-          errorMsg ? "outline-red-500" : "outline-green-500"
-        }
+       
         ${styles} `
         )}
       >
@@ -97,17 +76,8 @@ export default function CustomInput({
           </div>
         </div>
 
-        <div className="absolute right-2 top-0 bottom-0 h-full flex items-center ">
-          {errorMsg ? (
-            <CircleX className="text-white fill-red-500" />
-          ) : (
-            <CircleCheck className="text-white fill-green-500" />
-          )}
-        </div>
       </div>
-      <div className="text-sm font-semibold text-left w-full h-4">
-        {errorMsg?.errMsg}
-      </div>
+    
     </>
   );
 }
